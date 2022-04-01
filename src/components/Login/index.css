@@ -1,0 +1,156 @@
+.login-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.login-card {
+  width: 30%;
+  background: #fefeff;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 8px 40px rgb(7 7 7 / 8%);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.login-text {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  color: #0f172a;
+  padding: 0;
+  margin: 0;
+}
+
+.tasty-kitchen-heading {
+  font-family: DM sans;
+  font-style: italic;
+  font-weight: 700;
+  color: #f7931e;
+}
+
+.form-container {
+  width: 80%;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+}
+
+.input-label {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 10px;
+  color: #475569;
+}
+.password-input-field,
+.username-input-field {
+  background: #e2e8f0;
+  padding-left: 10px;
+}
+
+.login-button,
+.password-input-field,
+.username-input-field {
+  border-radius: 2px;
+  border: none;
+  height: 40px;
+  left: 0;
+  right: 0;
+  top: 24px;
+}
+
+.login-button {
+  background: #f7931e;
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+}
+
+.logo-background-img {
+  display: none;
+}
+
+.logo-background {
+  width: 50%;
+  height: 100vh;
+  background-size: cover;
+}
+@media (max-width: 700px) {
+  .login-container {
+    padding: 10px;
+  }
+  .login-text {
+    text-align: left !important;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 20px;
+  }
+  .app-logo {
+    display: none;
+  }
+  .tasty-kitchen-heading {
+    display: none;
+  }
+  .logo-background-image {
+    height: 50%;
+    width: 100%;
+    border-top-left-radius: 60%;
+    border-bottom-right-radius: 60%;
+    border-bottom-left-radius: 60%;
+    background-size: cover;
+  }
+
+  .login-card {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: flex-end;
+  }
+  .login-text,
+  .tasty-kitchen-heading {
+    font-size: 14px;
+  }
+  .form-container {
+    width: 100%;
+  }
+  .input-container {
+    padding-top: 0;
+    margin-bottom: 10px;
+  }
+
+  .input-label {
+    font-style: normal;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #475569;
+  }
+  .username-input-field,
+  .password-input-field {
+    margin: 0px;
+    padding-bottom: 12px;
+    width: 100%;
+  }
+  .password-input-field,
+  .username-input-field {
+    padding-left: 10px;
+  }
+  .logo-background {
+    display: none;
+  }
+}
+
+@media (min-width: 701px) {
+  .logo-background-image {
+    display: none;
+  }
+}

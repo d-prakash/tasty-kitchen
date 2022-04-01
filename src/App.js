@@ -1,3 +1,4 @@
+import Login from './components/Login'
 import './App.css'
 
 const sortByOptions = [
@@ -13,6 +14,10 @@ const sortByOptions = [
   },
 ]
 
-const App = () => <h1>Hello Prakash</h1>
+const App = () => (
+  <>
+    <Login />
+  </>
+)
 
 export default App
