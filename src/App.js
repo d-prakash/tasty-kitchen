@@ -1,6 +1,4 @@
 import './App.css'
-import Counter from './components/Counter'
-import Footer from './components/Footer'
 
 const sortByOptions = [
   {
@@ -15,11 +13,6 @@ const sortByOptions = [
   },
 ]
 
-const App = () => (
-  <>
-    <Counter />
-    <Footer />
-  </>
-)
+const App = () => <h1>Hello Prakash</h1>
 
 export default App
