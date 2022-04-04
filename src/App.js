@@ -3,10 +3,11 @@ import {Route, Switch} from 'react-router-dom'
 import Footer from './components/Footer'
 import Home from './components/Home'
 import Cart from './components/Cart'
-import Login from './components/Login'
+import LoginForm from './components/LoginForm'
+import NotFound from './components/NotFound'
 import './App.css'
 
-const sortByOptions = [
+/* const sortByOptions = [
   {
     id: 0,
     displayText: 'Highest',
@@ -18,12 +19,13 @@ const sortByOptions = [
     value: 'Lowest',
   },
 ]
-
+*/
 const App = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route exact path="/login" component={Login} />
+    <Route exact path="/login" component={LoginForm} />
     <Route exact path="/cart" component={Cart} />
+    <Route component={NotFound} />
     <Footer />
   </Switch>
 )

@@ -15,7 +15,7 @@
 .navbar-small-screen-container {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 90%;
 }
 .nav-link {
   text-decoration: none;
@@ -56,9 +56,9 @@
 
 .nav-bar-large-screen-container {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: 90%;
 }
 
 .header-logo-container {
@@ -97,6 +97,11 @@
   margin-left: 14px;
   cursor: pointer;
   outline: none;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
 }
 
 @media screen and (max-width: 768px) {

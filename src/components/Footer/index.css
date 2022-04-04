@@ -1,0 +1,62 @@
+.footer-container,
+.footer-heading-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-heading-logo-container {
+  flex-direction: row;
+}
+.footer-container {
+  height: 400px;
+  width: 100vw;
+  background-color: #0f172a;
+  flex-direction: column;
+}
+.logo {
+  width: 33px;
+  height: 23px;
+  margin-right: 10px;
+}
+
+.footer-heading {
+  font-family: DM Sans;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 28px;
+  color: #fff;
+}
+
+.footer-description {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  text-align: center;
+  color: #fff;
+}
+.social-icons-container {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+
+.icon {
+  height: 25px;
+  width: 19.5px;
+  left: 2px;
+  top: 0px;
+  border-radius: 0px;
+  font-family: Font Awesome 5 Brands;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #ffffff;
+  margin-right: 10px;
+}
