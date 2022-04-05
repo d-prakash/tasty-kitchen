@@ -3,6 +3,8 @@ import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Header from '../Header'
 import Footer from '../Footer'
+import ReactSlider from '../ReactSlider'
+import AllRestaurantsSection from '../AllRestaurantsSection'
 
 class Home extends Component {
   render() {
@@ -13,6 +15,8 @@ class Home extends Component {
     return (
       <>
         <Header />
+        <ReactSlider />
+        <AllRestaurantsSection />
         <Footer />
       </>
     )
