@@ -13,17 +13,21 @@ const imgUrl =
 const Footer = () => (
   <div className="footer-container">
     <div className="footer-heading-container">
-      <img src={imgUrl} className="logo" alt="website-footer-logo" />
+      <img
+        src={imgUrl}
+        className="website-footer-logo"
+        alt="website-footer-logo"
+      />
       <h1 className="footer-heading">Tasty Kitchens</h1>
     </div>
     <p className="footer-description">
       The only thing we are serious about is food. Contact us on
     </p>
     <div className="social-icons-container">
-      <FaPinterestSquare className="icon" />
-      <FaInstagram className="icon" />
-      <FaTwitterSquare className="icon" />
-      <FaFacebookSquare className="icon" />
+      <FaPinterestSquare className="icon" testid="pintrest-social-icon" />
+      <FaInstagram className="icon" testid="instagram-social-icon" />
+      <FaTwitterSquare className="icon" testid="twitter-social-icon" />
+      <FaFacebookSquare className="icon" testid="facebook-social-icon" />
     </div>
   </div>
 )
