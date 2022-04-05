@@ -1,4 +1,5 @@
 import {Link, withRouter} from 'react-router-dom'
+import Cookies from 'js-cookie'
 
 import './index.css'
 
@@ -11,6 +12,13 @@ const Header = props => {
     }
     return '##334155'
   }
+
+  const onClickLogout = () => {
+    const {history} = props
+    Cookies.remove('jwt_token')
+    history.replace('/login')
+  }
+
   return (
     <nav className="nav-header">
       <div className="navbar-small-screen-container">
@@ -62,7 +70,11 @@ const Header = props => {
             </Link>
           </li>
         </ul>
-        <button type="button" className="logout-desktop-btn">
+        <button
+          type="button"
+          className="logout-desktop-btn"
+          onClick={onClickLogout}
+        >
           Logout
         </button>
       </div>
