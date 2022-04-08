@@ -6,8 +6,19 @@ import './index.css'
 
 const limit = 9
 
+const restaurantApiStatusConstants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
+
 class AllRestaurantsSection extends Component {
-  state = {restaurantList: [], activePage: 1, isLoading: false}
+  state = {
+    restaurantList: [],
+    activePage: 1,
+    restaurantApiStatus: restaurantApiStatusConstants.initial,
+  }
 
   componentDidMount() {
     this.getAllRestaurantsData()
@@ -20,7 +31,7 @@ class AllRestaurantsSection extends Component {
 
   getAllRestaurantsData = async () => {
     this.setState({
-      isLoading: true,
+      restaurantApiStatus: restaurantApiStatusConstants.inProgress,
     })
     const {activePage} = this.state
     const offset = (activePage - 1) * limit
@@ -35,7 +46,7 @@ class AllRestaurantsSection extends Component {
     }
     const response = await fetch(restaurantsApiUrl, options)
     const fetchedData = await response.json()
-    console.log(fetchedData)
+    // console.log(fetchedData)
     if (response.ok === true) {
       // const fetchedData = await response.json()
       const updatedData = fetchedData.restaurants.map(restaurant => ({
@@ -58,41 +69,95 @@ class AllRestaurantsSection extends Component {
           totalReviews: restaurant.user_rating.total_reviews,
         },
       }))
-      this.setState({restaurantList: updatedData, isLoading: false})
+      this.setState({
+        restaurantApiStatus: restaurantApiStatusConstants.success,
+        restaurantList: updatedData,
+      })
+    } else if (response.ok === false) {
+      this.setState({
+        restaurantApiStatus: restaurantApiStatusConstants.failure,
+      })
     }
   }
 
-  renderRestaurantList = () => {
-    const {restaurantList} = this.state
-    return (
-      <div className="restaurant-section">
-        <div className="header-text-container">
-          <h1 className="restaurant-list-heading">Popular Restaurants</h1>
-          <p className="description">
-            Select your favorite restaurant special dish and make your day
-            happy...
-          </p>
-        </div>
-        <hr className="horizontal-line" />
-        <ul className="restaurant-list">
-          {restaurantList.map(restaurant => (
-            <RestaurantCard restaurantData={restaurant} key={restaurant.id} />
-          ))}
-        </ul>
-      </div>
-    )
-  }
-
-  renderLoader = () => (
+  restaurantsDisplayLoading = () => (
     <div className="products-loader-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
 
+  popularRestaurantsView = () => (
+    <div className="restaurant-section">
+      <div className="header-text-container">
+        <h1 className="restaurant-list-heading">Popular Restaurants</h1>
+        <p className="description">
+          Select your favorite restaurant special dish and make your day
+          happy...
+        </p>
+      </div>
+
+      <hr className="horizontal-line" />
+    </div>
+  )
+
+  noRestaurantsView = () => (
+    <div className="no-res-container">
+      <p className="description">No Restaurants Found!</p>
+    </div>
+  )
+
+  restaurantsDisplayLoading = () => (
+    <div className="products-loader-container">
+      <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
+    </div>
+  )
+
+  renderRestaurantsView = () => {
+    const {restaurantList, showNoRes} = this.state
+    // console.log(restaurantList)
+    return (
+      <>
+        {showNoRes ? (
+          <p>No Restaurants Found</p>
+        ) : (
+          <ul className="restaurant-list">
+            {restaurantList.map(restaurant => (
+              <RestaurantCard key={restaurant.id} restaurantData={restaurant} />
+            ))}
+          </ul>
+        )}
+      </>
+    )
+  }
+
+  noRestaurantsView = () => (
+    <div className="no-res-container">
+      <p className="description">No Restaurants Found!</p>
+    </div>
+  )
+
+  onRenderDisplayRestaurants = () => {
+    const {restaurantApiStatus} = this.state
+
+    switch (restaurantApiStatus) {
+      case restaurantApiStatusConstants.success:
+        return this.renderRestaurantsView()
+      case restaurantApiStatusConstants.inProgress:
+        return this.restaurantsDisplayLoading()
+      case restaurantApiStatusConstants.failure:
+        return this.noRestaurantsView()
+      default:
+        return null
+    }
+  }
+
   render() {
-    const {isLoading} = this.state
-    return isLoading ? this.renderLoader() : this.renderRestaurantList()
+    return (
+      <div className="display-container">
+        {this.popularRestaurantsView()}
+        {this.onRenderDisplayRestaurants()}
+      </div>
+    )
   }
 }
-
 export default AllRestaurantsSection
