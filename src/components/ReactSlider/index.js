@@ -9,10 +9,10 @@ export default class ReactSlider extends Component {
   state = {carouselList: [], isLoading: true}
 
   componentDidMount() {
-    this.getCorousel()
+    this.getCarousel()
   }
 
-  getCorousel = async () => {
+  getCarousel = async () => {
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = 'https://apis.ccbp.in/restaurants-list/offers'
     const options = {
@@ -37,7 +37,7 @@ export default class ReactSlider extends Component {
     </div>
   )
 
-  renderCorousel = () => {
+  renderCarousel = () => {
     const {carouselList} = this.state
     const settings = {
       dots: true,
@@ -66,6 +66,6 @@ export default class ReactSlider extends Component {
 
   render() {
     const {isLoading} = this.state
-    return isLoading ? this.renderLoader() : this.renderCorousel()
+    return isLoading ? this.renderLoader() : this.renderCarousel()
   }
 }
