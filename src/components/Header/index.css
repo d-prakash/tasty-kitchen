@@ -3,13 +3,6 @@
   justify-content: center;
   border-bottom: 1px solid #f3f3f3;
   background-color: #f8fafc;
-  width: 100%;
-}
-
-.nav-content {
-  display: flex;
-
-  justify-content: space-between;
 }
 
 .navbar-small-screen-container {
@@ -135,4 +128,29 @@
   .navbar-small-screen-container {
     display: none;
   }
+}
+@media screen and (min-width: 768px) {
+  .hamburger-btn {
+    display: none;
+    margin-right: 0%;
+  }
+}
+
+.modal-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin-top: 0px;
+  background: #e5e5e5;
+  width: 100vw;
+}
+
+.nav-link-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.close-btn {
+  border: none;
+  background: none;
 }
