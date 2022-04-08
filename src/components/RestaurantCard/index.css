@@ -1,56 +1,91 @@
+.restaurant-link {
+  text-decoration: none;
+}
+
+.restaurant-card {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 120px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .restaurant-card {
+    width: 380px;
+  }
+}
+
 .restaurant-image {
-  width: 140px;
+  width: 100px;
   height: 120px;
   border-radius: 8px;
-  margin-right: 10px;
-  flex-shrink: 0;
+  margin-right: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  .restaurant-image {
+    width: 160px;
+  }
 }
 
 .restaurant-details {
   display: flex;
   flex-direction: column;
-  width: 180px;
-  align-items: flex-start;
   justify-content: center;
-  padding-top: 16px;
-  padding-bottom: 16px;
 }
-.list-item {
-  width: 30%;
-  margin-bottom: 32px;
-  display: flex;
-}
+
 .restaurant-name {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0.2px;
+  color: #334155;
   margin: 0px;
-}
-.restaurant-cuisine {
-  margin-top: 8px;
-  margin-bottom: 9px;
-}
-.ratings-container {
-  margin-bottom: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-}
-.rating {
-  margin: 0 4px;
-}
-.restaurant-details {
-  display: flex;
-  align-items: center;
-  width: 140px;
-  justify-content: space-between;
 }
 
 @media screen and (min-width: 768px) {
   .restaurant-name {
-    font-family: DM Sans;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: 0.2px;
-    color: #334155;
+    font-size: 15px;
   }
+}
+
+.restaurant-cuisine {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #64748b;
+  margin: 0px;
+}
+
+.ratings-container {
+  display: flex;
+  align-items: center;
+  margin: 0px;
+}
+
+.start {
+  width: 12px;
+  color: #ffcc00;
+}
+
+.rest-rating {
+  font-family: DM Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #1e293b;
+}
+.reviews {
+  color: #1e293b;
+  margin-left: 2px;
+  font-size: 15px;
 }
