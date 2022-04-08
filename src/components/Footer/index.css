@@ -1,19 +1,18 @@
-.footer-container,
-.footer-heading-logo-container {
+.footer-container {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.footer-heading-logo-container {
-  flex-direction: row;
-}
-.footer-container {
   height: 400px;
   width: 100vw;
   background-color: #0f172a;
   flex-direction: column;
 }
+
+.footer-heading-container {
+  display: flex;
+  align-items: center;
+}
+
 .logo {
   width: 33px;
   height: 23px;
@@ -27,6 +26,7 @@
   font-size: 32px;
   line-height: 28px;
   color: #fff;
+  margin-left: 10px;
 }
 
 .footer-description {
