@@ -1,7 +1,9 @@
 import {Component} from 'react'
+import {RiArrowDropLeftLine, RiArrowDropRightLine} from 'react-icons/ri'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import RestaurantCard from '../RestaurantCard'
+import RestaurantsHeader from '../RestaurantsHeader'
 import './index.css'
 
 const limit = 9
@@ -13,11 +15,26 @@ const restaurantApiStatusConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
+const sortByOptions = [
+  {
+    id: 0,
+    displayText: 'Highest',
+    value: 'Highest',
+  },
+  {
+    id: 2,
+    displayText: 'Lowest',
+    value: 'Lowest',
+  },
+]
+
 class AllRestaurantsSection extends Component {
   state = {
     restaurantList: [],
     activePage: 1,
     restaurantApiStatus: restaurantApiStatusConstants.initial,
+    sortOption: sortByOptions[1].value,
+    totalPages: 0,
   }
 
   componentDidMount() {
@@ -33,10 +50,10 @@ class AllRestaurantsSection extends Component {
     this.setState({
       restaurantApiStatus: restaurantApiStatusConstants.inProgress,
     })
-    const {activePage} = this.state
+    const {activePage, sortOption} = this.state
     const offset = (activePage - 1) * limit
     const jwtToken = Cookies.get('jwt_token')
-    const restaurantsApiUrl = `https://apis.ccbp.in/restaurants-list?offset=${offset}&limit=${limit}`
+    const restaurantsApiUrl = `https://apis.ccbp.in/restaurants-list?offset=${offset}&limit=${limit}&sort_by_rating=${sortOption}`
 
     const options = {
       method: 'GET',
@@ -46,6 +63,8 @@ class AllRestaurantsSection extends Component {
     }
     const response = await fetch(restaurantsApiUrl, options)
     const fetchedData = await response.json()
+
+    const totalPages = Math.ceil(fetchedData.total / limit)
     // console.log(fetchedData)
     if (response.ok === true) {
       // const fetchedData = await response.json()
@@ -72,6 +91,7 @@ class AllRestaurantsSection extends Component {
       this.setState({
         restaurantApiStatus: restaurantApiStatusConstants.success,
         restaurantList: updatedData,
+        totalPages,
       })
     } else if (response.ok === false) {
       this.setState({
@@ -80,23 +100,37 @@ class AllRestaurantsSection extends Component {
     }
   }
 
+  updateOption = option => {
+    this.setState({sortOption: option}, this.getAllRestaurantsData)
+  }
+
+  decrementPage = () => {
+    const {activePage} = this.state
+    if (activePage > 1) {
+      this.setState(
+        prevState => ({
+          activePage: prevState.activePage - 1,
+        }),
+        this.getAllRestaurantsData,
+      )
+    }
+  }
+
+  incrementPage = () => {
+    const {activePage, totalPages} = this.state
+    if (activePage < totalPages) {
+      this.setState(
+        prevState => ({
+          activePage: prevState.activePage + 1,
+        }),
+        this.getAllRestaurantsData,
+      )
+    }
+  }
+
   restaurantsDisplayLoading = () => (
     <div className="products-loader-container">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
-    </div>
-  )
-
-  popularRestaurantsView = () => (
-    <div className="restaurant-section">
-      <div className="header-text-container">
-        <h1 className="restaurant-list-heading">Popular Restaurants</h1>
-        <p className="description">
-          Select your favorite restaurant special dish and make your day
-          happy...
-        </p>
-      </div>
-
-      <hr className="horizontal-line" />
     </div>
   )
 
@@ -107,24 +141,66 @@ class AllRestaurantsSection extends Component {
   )
 
   restaurantsDisplayLoading = () => (
-    <div className="products-loader-container">
+    <div className="products-loader-container" testid="restaurants-list-loader">
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )
 
   renderRestaurantsView = () => {
-    const {restaurantList, showNoRes} = this.state
+    const {
+      restaurantList,
+      showNoRes,
+      sortOption,
+      activePage,
+      totalPages,
+    } = this.state
     // console.log(restaurantList)
     return (
       <>
         {showNoRes ? (
           <p>No Restaurants Found</p>
         ) : (
-          <ul className="restaurant-list">
-            {restaurantList.map(restaurant => (
-              <RestaurantCard key={restaurant.id} restaurantData={restaurant} />
-            ))}
-          </ul>
+          <>
+            <div>
+              <RestaurantsHeader
+                sortOption={sortOption}
+                sortByOptions={sortByOptions}
+                updateOption={this.updateOption}
+              />
+              <hr className="hr-line" />
+            </div>
+            <ul className="restaurant-list">
+              {restaurantList.map(restaurant => (
+                <RestaurantCard
+                  key={restaurant.id}
+                  restaurantData={restaurant}
+                />
+              ))}
+            </ul>
+            <div className="pagination-container">
+              <button
+                type="button"
+                className="pagination-button"
+                onClick={this.decrementPage}
+                testid="pagination-left-button"
+              >
+                <RiArrowDropLeftLine size={20} />
+              </button>
+              <p testid="active-page-number" className="page-count">
+                {activePage}
+              </p>
+              <span className="page-count">of</span>
+              <p className="page-count"> {totalPages}</p>
+              <button
+                type="button"
+                className="pagination-button"
+                onClick={this.incrementPage}
+                testid="pagination-right-button"
+              >
+                <RiArrowDropRightLine size={20} />
+              </button>
+            </div>
+          </>
         )}
       </>
     )
@@ -154,7 +230,6 @@ class AllRestaurantsSection extends Component {
   render() {
     return (
       <div className="display-container">
-        {this.popularRestaurantsView()}
         {this.onRenderDisplayRestaurants()}
       </div>
     )

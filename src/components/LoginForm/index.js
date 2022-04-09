@@ -62,14 +62,14 @@ class LoginForm extends Component {
         <div className="login-card">
           <img
             src="https://i.postimg.cc/XNZMm0J3/Frame-274-1.jpg"
-            className="app-logo"
+            className="website login"
             alt="logo"
           />
           <h1 className="tasty-kitchen-heading">Tasty Kitchens</h1>
           <img
             src="https://i.postimg.cc/5yRfcwYm/Rectangle-1456-3.jpg"
             className="logo-background-img logo-background-image"
-            alt="website logo"
+            alt="website login"
           />
           <img
             src="https://i.postimg.cc/5yRfcwYm/Rectangle-1456-3.jpg"

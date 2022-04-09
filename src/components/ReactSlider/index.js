@@ -32,7 +32,10 @@ export default class ReactSlider extends Component {
   }
 
   renderLoader = () => (
-    <div className="products-loader-container">
+    <div
+      className="products-loader-container"
+      testid="restaurants-offers-loader"
+    >
       <Loader type="ThreeDots" color="#0b69ff" height="50" width="50" />
     </div>
   )

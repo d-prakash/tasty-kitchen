@@ -1,6 +1,11 @@
 import {Link, withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
+import {GiHamburgerMenu} from 'react-icons/gi'
+import {AiOutlineCloseCircle} from 'react-icons/ai'
+import Popup from 'reactjs-popup'
+import CartContext from '../../context/cartContext'
+
 import './index.css'
 
 const Header = props => {
@@ -18,6 +23,23 @@ const Header = props => {
     Cookies.remove('jwt_token')
     history.replace('/login')
   }
+
+  const renderCartNumber = () => (
+    <CartContext.Consumer>
+      {value => {
+        const {cartList} = value
+        const itemsCount = cartList.length
+
+        return (
+          <>
+            {itemsCount > 0 && (
+              <span className="cart-count-badge">{itemsCount}</span>
+            )}
+          </>
+        )
+      }}
+    </CartContext.Consumer>
+  )
 
   return (
     <nav className="nav-header">
@@ -60,23 +82,63 @@ const Header = props => {
               Home
             </Link>
           </li>
-          <li className="nav-menu-item">
-            <Link
-              className="nav-link"
-              to="/cart"
-              style={{color: getColor('/cart')}}
-            >
+
+          <Link
+            className="nav-link"
+            to="/cart"
+            style={{color: getColor('/cart')}}
+          >
+            <li className="nav-menu-item">
               Cart
-            </Link>
+              {renderCartNumber()}
+            </li>
+          </Link>
+
+          <li>
+            <button
+              type="button"
+              className="logout-desktop-btn"
+              onClick={onClickLogout}
+            >
+              Logout
+            </button>
           </li>
         </ul>
-        <button
-          type="button"
-          className="logout-desktop-btn"
-          onClick={onClickLogout}
+        <Popup
+          trigger={
+            <button type="button" className="hamburger-btn">
+              <GiHamburgerMenu size={25} className="hamburger" />
+            </button>
+          }
         >
-          Logout
-        </button>
+          {close => (
+            <div className="modal-container">
+              <div className="nav-link-container">
+                <Link to="/" className="nav-link">
+                  <p className="nav-menu-item" style={{color: getColor('/')}}>
+                    Home
+                  </p>
+                </Link>
+                <Link to="/cart" className="nav-link">
+                  <p className="cart-number" style={{color: getColor('/cart')}}>
+                    Cart
+                    {renderCartNumber()}
+                  </p>
+                </Link>
+                <button
+                  type="button"
+                  className="logout-desktop-btn"
+                  onClick={onClickLogout}
+                >
+                  Logout
+                </button>
+              </div>
+              <button type="button" className="close-btn">
+                <AiOutlineCloseCircle size={18} onClick={() => close()} />
+              </button>
+            </div>
+          )}
+        </Popup>
       </div>
     </nav>
   )

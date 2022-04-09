@@ -154,3 +154,8 @@
   border: none;
   background: none;
 }
+.cart-number {
+  color: blue;
+  font-size: 14px;
+  margin-left: 10px;
+}
