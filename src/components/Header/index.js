@@ -1,27 +1,30 @@
 import {Link, withRouter} from 'react-router-dom'
-import Cookies from 'js-cookie'
 
 import {GiHamburgerMenu} from 'react-icons/gi'
 import {AiOutlineCloseCircle} from 'react-icons/ai'
+
+import Cookies from 'js-cookie'
+
 import Popup from 'reactjs-popup'
+
 import CartContext from '../../context/cartContext'
 
 import './index.css'
 
 const Header = props => {
+  const onClickLogout = () => {
+    Cookies.remove('jwt_token')
+    const {history} = props
+
+    history.replace('/login')
+  }
+
   const getColor = current => {
     const {history} = props
-    // console.log(history)
     if (history.location.pathname === current) {
       return '#f7931e'
     }
-    return '##334155'
-  }
-
-  const onClickLogout = () => {
-    const {history} = props
-    Cookies.remove('jwt_token')
-    history.replace('/login')
+    return '#334155'
   }
 
   const renderCartNumber = () => (
@@ -43,57 +46,31 @@ const Header = props => {
 
   return (
     <nav className="nav-header">
-      <div className="navbar-small-screen-container">
-        <Link className="nav-link" to="/">
-          <div className="header-logo-container">
+      <div className="nav-bar-large-container">
+        <div className="icon-container">
+          <Link to="/" className="nav-link">
             <img
-              src="https://res.cloudinary.com/nsp/image/upload/v1635311275/tastyKitchens/websiteLogo_1x_fzy1tx.png"
               className="website-logo"
+              src="https://res.cloudinary.com/dkobk5oao/image/upload/v1633608363/Frame_274_mqin4h.png"
               alt="website logo"
             />
-            <p className="logo-name">Tasty Kitchens</p>
-          </div>
-        </Link>
-        <button type="button" className="nav-mobile-btn">
-          <img
-            src="https://res.cloudinary.com/nsp/image/upload/v1635332660/tastyKitchens/menu_1x_fcu8zv.png"
-            className="navbar-image"
-            alt="nav menu"
-          />
-        </button>
-      </div>
-
-      <div className="nav-bar-large-screen-container">
-        <div className="icon-container">
-          <Link className="nav-link" to="/">
-            <div className="header-logo-container">
-              <img
-                src="https://res.cloudinary.com/nsp/image/upload/v1635311275/tastyKitchens/websiteLogo_1x_fzy1tx.png"
-                className="website-logo"
-                alt="website logo"
-              />
-              <p className="logo-name">Tasty Kitchens</p>
-            </div>
           </Link>
+          <h1 className="icon-heading">Tasty Kitchen</h1>
         </div>
-        <ul className="nav-menu">
-          <li className="nav-menu-item">
-            <Link className="nav-link" to="/" style={{color: getColor('/')}}>
-              Home
-            </Link>
-          </li>
 
-          <Link
-            className="nav-link"
-            to="/cart"
-            style={{color: getColor('/cart')}}
-          >
-            <li className="nav-menu-item">
+        <ul className="nav-menu">
+          <Link to="/" className="nav-link">
+            <li className="nav-menu-item" style={{color: getColor('/')}}>
+              Home
+            </li>
+          </Link>
+
+          <Link to="/cart" className="nav-link">
+            <li className="nav-menu-item" style={{color: getColor('/cart')}}>
               Cart
               {renderCartNumber()}
             </li>
           </Link>
-
           <li>
             <button
               type="button"
@@ -104,41 +81,48 @@ const Header = props => {
             </button>
           </li>
         </ul>
-        <Popup
-          trigger={
-            <button type="button" className="hamburger-btn">
-              <GiHamburgerMenu size={25} className="hamburger" />
-            </button>
-          }
-        >
-          {close => (
-            <div className="modal-container">
-              <div className="nav-link-container">
-                <Link to="/" className="nav-link">
-                  <p className="nav-menu-item" style={{color: getColor('/')}}>
-                    Home
-                  </p>
-                </Link>
-                <Link to="/cart" className="nav-link">
-                  <p className="cart-number" style={{color: getColor('/cart')}}>
-                    Cart
-                    {renderCartNumber()}
-                  </p>
-                </Link>
-                <button
-                  type="button"
-                  className="logout-desktop-btn"
-                  onClick={onClickLogout}
-                >
-                  Logout
+        <div>
+          <Popup
+            trigger={
+              <button type="button" className="hamburger-btn">
+                <GiHamburgerMenu size={25} className="hamburger" />
+              </button>
+            }
+            position="left center"
+            closeOnDocumentClick
+          >
+            {close => (
+              <div className="modal-container">
+                <div className="nav-link-container">
+                  <Link to="/" className="nav-link">
+                    <p className="nav-menu-item" style={{color: getColor('/')}}>
+                      Home
+                    </p>
+                  </Link>
+                  <Link to="/cart" className="nav-link">
+                    <p
+                      className="nav-menu-item"
+                      style={{color: getColor('/cart')}}
+                    >
+                      Cart
+                      {renderCartNumber()}
+                    </p>
+                  </Link>
+                  <button
+                    type="button"
+                    className="logout-desktop-btn"
+                    onClick={onClickLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+                <button type="button" className="close-btn">
+                  <AiOutlineCloseCircle size={18} onClick={() => close()} />
                 </button>
               </div>
-              <button type="button" className="close-btn">
-                <AiOutlineCloseCircle size={18} onClick={() => close()} />
-              </button>
-            </div>
-          )}
-        </Popup>
+            )}
+          </Popup>
+        </div>
       </div>
     </nav>
   )

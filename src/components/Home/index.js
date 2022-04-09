@@ -5,6 +5,7 @@ import Header from '../Header'
 import Footer from '../Footer'
 import ReactSlider from '../ReactSlider'
 import AllRestaurantsSection from '../AllRestaurantsSection'
+import './index.css'
 
 class Home extends Component {
   render() {
@@ -15,8 +16,10 @@ class Home extends Component {
     return (
       <>
         <Header />
-        <ReactSlider />
-        <AllRestaurantsSection />
+        <div className="home-container">
+          <ReactSlider />
+          <AllRestaurantsSection />
+        </div>
         <Footer />
       </>
     )

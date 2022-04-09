@@ -62,8 +62,8 @@ class LoginForm extends Component {
         <div className="login-card">
           <img
             src="https://i.postimg.cc/XNZMm0J3/Frame-274-1.jpg"
-            className="website login"
-            alt="logo"
+            className="app-logo"
+            alt="website logo"
           />
           <h1 className="tasty-kitchen-heading">Tasty Kitchens</h1>
           <img
@@ -74,7 +74,7 @@ class LoginForm extends Component {
           <img
             src="https://i.postimg.cc/5yRfcwYm/Rectangle-1456-3.jpg"
             className="logo-background-image"
-            alt="website logo"
+            alt="website login"
           />
           <h1 className="login-text">Login</h1>
           <form className="form-container" onSubmit={this.submitForm}>
@@ -113,7 +113,7 @@ class LoginForm extends Component {
         <img
           src="https://i.postimg.cc/5yRfcwYm/Rectangle-1456-3.jpg"
           className="logo-background"
-          alt="website logo"
+          alt="website login"
         />
       </div>
     )
